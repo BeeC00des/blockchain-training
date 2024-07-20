@@ -1,34 +1,50 @@
 "use client";
 import Image from "next/image";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { useAccount, useReadContract } from "wagmi";
+import { useAccount, useReadContract, useWriteContract } from "wagmi";
 import { abi, contractAddress  } from "./constant" ;
 import { Profile } from './profile';
+import {Input} from './input';
 import {config} from './config'
 
 export default function Home() {
-  const {address} = useAccount();
-  const result = useReadContract({
-    abi: abi,
+  const { address } = useAccount();
+  
+  const { data: greeting } = useReadContract({
+    abi,
     address: contractAddress,
-    functionName:"greeting",
+    functionName: "greeting",
+    scopeKey: "greeting",
     config
   });
-  console.log(result);
-  console.log(result.data);
+
+
+  // console.log(result);
+  // console.log(data);
+  
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-        Address Number: <br/> {address} 
+        Address Number: <br/> {address}  
         </p>
         <div className="border-gray-300 border-2 rounded-lg  p-3  lg:bg-gray-200">
-        <Profile/>
+            <Profile/>
         </div>
         
         <div className="border-gray-300 border-2 rounded-lg  p-3  lg:bg-gray-200">
             <ConnectButton />
         </div>
+      </div>
+      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
+        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
+        Get Greetings: <p>{greeting}</p>
+        </p>
+        <div className="border-gray-300 border-2 rounded-lg  p-3  lg:bg-gray-200 flex">
+        <p className="px-5">Set Greetings: </p> <Input/>
+        </div>
+
+
       </div>
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
