@@ -7,6 +7,6 @@ export const config = createConfig({
     // [localhost.id]: http(),
     [mainnet.id]: http(),
     [sepolia.id]: http(),
-    // [bnb.id]: http(),
+
   },
 })
