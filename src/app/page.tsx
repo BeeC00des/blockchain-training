@@ -1,7 +1,15 @@
 import Image from "next/image";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useReadContract } from "wagmi";
+import { abi, contractAddress  } from "./constant" 
 
 export default function Home() {
+  const result = useReadContract({
+    address: contractAddress,
+    abi: abi,
+    functionName:"greeting"
+  });
+  console.log(result.data);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">

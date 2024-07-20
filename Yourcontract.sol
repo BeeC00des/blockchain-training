@@ -6,7 +6,7 @@ contract YourContract {
 	// State Variables
 	address public immutable owner;
 	string public greeting = "Building Unstoppable Apps!!!";
-	bool public premium = false;
+	bool public premium = false; 
 	uint256 public totalCounter = 0;
 	mapping(address => uint) public userGreetingCounter;
     mapping(address => uint256 ) public  contribution;
