@@ -13,8 +13,8 @@ export function Input() {
 
 
     return (
-        <div>
-            <input
+        <div className="w-full items-center justify-between font-mono text-sm lg:flex">
+            <input className="w-full"
                 type="text"
                 value={newGreeting}
                 onChange={(e) => setNewGreeting(e.target.value)}
